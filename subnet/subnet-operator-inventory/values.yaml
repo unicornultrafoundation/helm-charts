@@ -1,0 +1,115 @@
+# Default values for subnet-operator-inventory
+# This is a YAML-formatted file.
+
+replicaCount: 1
+revisionHistoryLimit: 1
+
+# Namespace for deployment
+namespace: subnet-services
+
+image:
+  repository: u2udepin/subnet-node
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # Hardware discovery service account
+  hardwareDiscovery:
+    create: true
+    annotations: {}
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 8080
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# RBAC configuration
+# Subnet Operator requires cluster-wide permissions to manage subnets across the entire cluster
+rbac:
+  create: true
+  # Additional custom RBAC rules can be added here
+  # These rules will be merged with the default cluster-wide permissions
+  rules: []
+
+# Leader election configuration
+leaderElection:
+  enabled: true
+  resourceName: subnet-operator-inventory-leader-election
+  resourceNamespace: ""
+
+# Metrics configuration
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: false
+    interval: 30s
+    scrapeTimeout: 10s
+
+# Logging configuration
+logging:
+  level: info
+  format: json
+
+# Operator configuration
+operator:
+  # Watch namespace, empty means all namespaces
+  watchNamespace: ""
+  # Sync period in seconds
+  syncPeriod: 60
+  # Max concurrent reconciles
+  maxConcurrentReconciles: 1
+
+# Configuration file
+config:
+  version: v1
+  cluster_storage:
+    - default
+  exclude:
+    nodes: []
+    node_storage: []
+
