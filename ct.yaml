@@ -1,0 +1,22 @@
+# Chart testing configuration
+chart-dirs:
+  - charts
+
+# Target branch for comparison
+target-branch: main
+
+# Validate maintainers
+validate-maintainers: false
+
+# Chart repos
+chart-repos:
+  - u2u=https://unicornultrafoundation.github.io/helm-charts/
+
+# Allowed chart versions
+allowed-chart-versions:
+  - v2
+  - v3
+
+# Linting rules
+lint-conf: .github/lintconf.yaml
+

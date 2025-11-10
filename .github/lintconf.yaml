@@ -1,0 +1,7 @@
+# Helm lint configuration
+strict: false
+quiet: false
+color: true
+unittest: false
+debug: false
+

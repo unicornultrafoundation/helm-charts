@@ -1,0 +1,8 @@
+# Chart releaser configuration
+charts-dir: charts
+index-path: index.yaml
+packages-path: packages
+owner: unicornultrafoundation
+git-repo: helm-charts
+webhook: ""
+

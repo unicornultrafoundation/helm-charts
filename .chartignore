@@ -1,0 +1,10 @@
+# Chart ignore patterns
+.github/
+*.md
+!charts/**/README.md
+!charts/**/Chart.yaml
+!charts/**/values.yaml
+!charts/**/values.example.yaml
+!charts/**/templates/
+!charts/**/.helmignore
+
